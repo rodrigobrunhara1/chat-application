@@ -1,3 +1,3 @@
 import { io } from "./http";
 
-console.log('Server running.')
+console.log('Server running!')
