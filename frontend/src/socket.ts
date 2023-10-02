@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client';
 
-export const socket = io();
+export const socket = io("https://vercel.com/rodrigobrunhara/chat-application-server");
 
 // emit => emitir alguma informação
 // on => escutando alguma informação
