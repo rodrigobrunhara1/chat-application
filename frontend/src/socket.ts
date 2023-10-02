@@ -4,7 +4,8 @@ export const socket = io("https://chat-application-server-ten.vercel.app", {
   withCredentials: true,
   extraHeaders: {
     "my-custom-header": "abcd"
-  }
+  },
+  transports: ['websocket']
 });
 
 // emit => emitir alguma informação
