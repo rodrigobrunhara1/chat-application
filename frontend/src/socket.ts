@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client';
 
-export const socket = io("https://vercel.com/rodrigobrunhara/chat-application-server", {
+export const socket = io("https://chat-application-server-ten.vercel.app", {
   withCredentials: true,
   extraHeaders: {
     "my-custom-header": "abcd"
