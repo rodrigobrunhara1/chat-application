@@ -11,6 +11,5 @@ export async function receivedMessageChatGpt(message: string) {
         messages: [{ role: 'user', content: message }],
         model: 'gpt-3.5-turbo',
     });
-    console.log(chatCompletion.choices[0].message.content);
     return chatCompletion.choices[0].message.content;
 }
