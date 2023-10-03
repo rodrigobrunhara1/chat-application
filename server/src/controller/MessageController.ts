@@ -4,13 +4,15 @@ import Message from "../database/schemas/Message";
 class MessageController {
 
     async create(responseMessage: any) {
-        const { userId, description, room } = responseMessage;
+        const { userId, description, room, name, typeUser } = responseMessage;
         console.log(responseMessage);
         try {
             const message = await Message.create({
                 userId,
                 description,
-                room
+                room,
+                name,
+                typeUser
             })
             console.log("Creating message- OK!!");
 
