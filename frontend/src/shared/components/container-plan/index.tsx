@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
+import { GrindPlanContainer } from "./styles";
 
 interface ContainerPlanProps {
   roomUrl: string | null;
@@ -19,16 +20,7 @@ export const ContainerPlan = ({ roomUrl }: ContainerPlanProps) => {
           flexGrow: 1,
         }}
       >
-        <Grid
-          container
-          spacing={2}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100%",
-          }}
-        >
+        <Grid container spacing={2} sx={GrindPlanContainer}>
           <CardPlan />
           <Grid item>
             <Container sx={{ width: 500, color: "white" }}>

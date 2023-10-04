@@ -1,34 +1,12 @@
 import MessageController from "./controller/MessageController";
 import { io } from "./http";
 import { receivedMessageChatGpt } from "./openai";
+import { CustomerService } from "./typing/CustomerService";
+import { TypeUser } from "./typing/Enuns/TypeUser";
+import { RoomUser } from "./typing/RoomUser";
 
-interface RoomUser {
-  socket_id: string,
-  userId: number | undefined,
-  room: string
-}
-
-interface RoomUser {
-  socket_id: string,
-  userId: number | undefined,
-  room: string
-}
-
-interface CustomerService {
-  userId: number | undefined,
-  room: string,
-  // createdAt: Date,
-}
-
-enum TypeUser {
-  client = 1,
-  chatbot = 2,
-  system = 3,
-  service = 4
-}
 const users: RoomUser[] = [];
 var customerService: CustomerService = { userId: TypeUser.chatbot, room: 'sala-home' };
-
 
 io.on("connection", socket => {
   socket.on("select_room", (data: any, callback) => {

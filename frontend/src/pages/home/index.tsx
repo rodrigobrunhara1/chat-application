@@ -1,12 +1,8 @@
 import Box from "@mui/material/Box";
-import Fab from "@mui/material/Fab";
-import ChatIcon from "@mui/icons-material/Chat";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
-import CloseIcon from "@mui/icons-material/Close";
 import { useState, useRef, useEffect } from "react";
 import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
@@ -15,16 +11,12 @@ import TextField from "@mui/material/TextField";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
-import Avatar from "@mui/material/Avatar";
-import Typography from "@mui/material/Typography";
 import { socket } from "../../socket";
 import CoPresentIcon from "@mui/icons-material/CoPresent";
 import Badge from "@mui/material/Badge";
-import { useParams } from "react-router-dom";
 import Container from "@mui/material/Container";
 import { useSearchParams } from "react-router-dom";
 import dot from "../../assets/dot.gif";
-import verify from "../../assets/verify.png";
 import { Menu } from "../../shared/components/menu";
 import { SystemItemMessage } from "../../shared/components/system-item-message";
 import { ChatSkeleton } from "../../shared/components/chat-skeleton";
@@ -33,26 +25,28 @@ import { Message } from "../../shared/typing/Message";
 import { RoomUser } from "../../shared/typing/RoomUser";
 import { ContainerPlan } from "../../shared/components/container-plan";
 import { ItemMessage } from "../../shared/components/item-message";
+import { CardHeaderChat } from "../../shared/components/card-header-chat";
+import { ButtonChat } from "../../shared/components/button-chat";
+import { TitlePage } from "../../shared/components/title-page";
+import {
+  backgroundPage,
+  ButtonSend,
+  CardContainer,
+  chatCardBox,
+} from "./styles";
 
 export function Home() {
   const [visible, setVisible] = useState(false);
   const [valueInput, setValueInput] = useState<string>("");
   const scrollRef = useRef<null | HTMLDivElement>(null);
   const [typing, setTyping] = useState(false);
-
   const [messageList, setMessageList] = useState<Array<Message>>([]);
-  const params = useParams();
   const useSearch = useSearchParams();
   const paramsRoom = useSearch[0].get("room");
   const typeServiceRoom = paramsRoom ? 1 : 2;
-
   const [typeService, setTypeService] = useState(typeServiceRoom);
-
   const smartContactName = "@Dito";
-  const emptyMessages = "Welcome to DITO smart contact!";
   const standardRoom = "sala-home";
-  const titlePage = "Plans";
-  const subTitlePage = "Choose one of our intelligent and human contact plans!";
 
   useEffect(() => {
     const userRoom: RoomUser = {
@@ -118,7 +112,7 @@ export function Home() {
       typeUser: paramsRoom ? TypeUser.service : TypeUser.client,
     };
     socket.emit("typping_message", messageSend);
-    socket.emit("input_message", messageSend, (response: Message[]) => {
+    socket.emit("input_message", messageSend, () => {
       setTyping(false);
     });
     setValueInput("");
@@ -126,7 +120,7 @@ export function Home() {
 
   const changeCustomerService = (optionService: string) => {
     const changeService = {
-      userId: optionService === "chatBot" ? 2 : 1,
+      userId: optionService === "chatBot" ? TypeUser.chatbot : TypeUser.client,
       room: paramsRoom ?? standardRoom,
     };
     const nameHumanService = "HumanService" + Math.floor(Math.random() * 1000);
@@ -141,91 +135,19 @@ export function Home() {
   };
 
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        background:
-          "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,0,113,0.8155637254901961) 36%, rgba(0,212,255,1) 100%)",
-        borderRadius: "20px",
-      }}
-    >
+    <Box sx={backgroundPage}>
       <Menu />
-
       <Container>
         <Box sx={{ height: "100vh" }}>
-          <Typography
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "30px",
-              marginBottom: "30px",
-            }}
-            variant="h4"
-            color="white"
-          >
-            {titlePage}
-          </Typography>
-          <Typography
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              marginBottom: "30px",
-            }}
-            variant="h5"
-            color="white"
-          >
-            {subTitlePage}
-          </Typography>
+          <TitlePage />
           <ContainerPlan roomUrl={paramsRoom} />
         </Box>
       </Container>
       {visible && (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "end",
-            alignContent: "end",
-            marginRight: "40px",
-            flexWrap: "wrap",
-            position: "absolute",
-            right: 0,
-            bottom: "120px",
-            "& > :not(style)": {
-              m: 1,
-              width: 300,
-              height: 500,
-              borderRadius: "10px",
-            },
-          }}
-        >
+        <Box sx={chatCardBox}>
           <Card sx={{ maxWidth: 345 }}>
-            <CardHeader
-              avatar={
-                <Avatar sx={{ bgcolor: "blue" }} aria-label="recipe">
-                  {<FlutterDashIcon /> ?? "D"}
-                </Avatar>
-              }
-              action={
-                <IconButton aria-label="settings" onClick={() => openChat()}>
-                  <CloseIcon />
-                </IconButton>
-              }
-              title={
-                <>
-                  <strong>{smartContactName}</strong>{" "}
-                  <img src={verify} alt="verify" />
-                </>
-              }
-              subheader="Smart Contact"
-            />
-
-            <CardContent
-              sx={{
-                overflowY: "scroll",
-                height: "55%",
-                padding: 0,
-              }}
-            >
+            <CardHeaderChat openChat={openChat} nameBot={smartContactName} />
+            <CardContent sx={CardContainer}>
               <List sx={{ width: "100%" }}>
                 <div ref={scrollRef}>
                   {messageList.map((message, index) => (
@@ -287,14 +209,7 @@ export function Home() {
                   <CoPresentIcon />
                 </Badge>
               </IconButton>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "end",
-                  alignContent: "end",
-                  width: "100%",
-                }}
-              >
+              <Box sx={ButtonSend}>
                 <Button
                   variant="outlined"
                   endIcon={<SendIcon />}
@@ -308,20 +223,7 @@ export function Home() {
           </Card>
         </Box>
       )}
-      <Box
-        sx={{
-          position: "fixed",
-          width: "100%",
-          left: -20,
-          bottom: "50px",
-          textAlign: "end",
-          "& > :not(style)": { m: 1 },
-        }}
-      >
-        <Fab color="primary" aria-label="chat" onClick={() => openChat()}>
-          <ChatIcon />
-        </Fab>
-      </Box>
+      <ButtonChat openChat={openChat} />
     </Box>
   );
 }

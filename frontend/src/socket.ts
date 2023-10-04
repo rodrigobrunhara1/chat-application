@@ -1,17 +1,13 @@
 import { io } from 'socket.io-client';
 
-export const socket = io("https://chat-application-server-ten.vercel.app", {
+export const socket = io("http://localhost:3350", {
   withCredentials: true,
   extraHeaders: {
     "my-custom-header": "abcd"
   },
-  forceNew: true,
   transports: ['websocket']
 });
 
-// emit => emitir alguma informação
-// on => escutando alguma informação
-
 socket.on("connect", () => {
-  console.log("Connect:", socket.connected); // true
+  console.log("Connect:", socket.connected);
 });

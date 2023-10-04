@@ -6,6 +6,6 @@ export default async function connectToMongoDB() {
         await mongoose.connect(`${process.env.MONGODB_URI}`);
         console.log("Connected database");
     } catch (error) {
-        console.log("Error connecting to moogose!", error)
+        console.error("Error connecting to moogose!", error);
     }
 }

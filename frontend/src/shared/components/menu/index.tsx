@@ -2,21 +2,12 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 import HomeIcon from "@mui/icons-material/Home";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
+import { MenuContainer } from "./styles";
 
 export function Menu() {
   return (
     <>
-      <Breadcrumbs
-        aria-label="breadcrumb"
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          fontSize: "2rem",
-          width: "100%",
-          background: "aliceblue",
-          borderRadius: "15px",
-        }}
-      >
+      <Breadcrumbs aria-label="breadcrumb" sx={MenuContainer}>
         <Link
           underline="hover"
           sx={{ display: "flex", alignItems: "center" }}

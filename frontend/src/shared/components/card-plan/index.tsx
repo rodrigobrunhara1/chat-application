@@ -7,6 +7,7 @@ import robotfree from "../../../assets/robotfree.png";
 import robotpay from "../../../assets/robotpay.png";
 import Button from "@mui/material/Button";
 import { planos } from "../../services/api/planos/planos";
+import { cardActionAreaContainer } from "./styles";
 
 export function CardPlan() {
   return (
@@ -14,14 +15,7 @@ export function CardPlan() {
       {planos.map((plano, index) => (
         <Grid item key={index}>
           <Card key={index}>
-            <CardActionArea
-              sx={{
-                maxWidth: 250,
-                height: 500,
-                width: 250,
-                borderRadius: "10px",
-              }}
-            >
+            <CardActionArea sx={cardActionAreaContainer}>
               <CardContent>
                 <Typography
                   gutterBottom
