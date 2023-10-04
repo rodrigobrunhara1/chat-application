@@ -35,15 +35,15 @@ Esta é a tela principal do site com algumas diferenças. Ao clicar no ícone, o
 E na imagem abaixo é exibida a mensagem "Are you using Human Service" para fins informativos de que essa janela é o contato humano que está operando.
 
 # Tecnologias Utilizadas:
-React.JS
-Typescript
-Javascript
-HTML
-CSS
-Material UI
-Node.JS
-MongoDB
-Mongoose
-Socket.IO
-OpenAi
+React.JS,
+Typescript,
+Javascript,
+HTML,
+CSS,
+Material UI,
+Node.JS,
+MongoDB,
+Mongoose,
+Socket.IO,
+OpenAi,
 Para mais informações, entre em contato com Rodrigo Brunhara.
