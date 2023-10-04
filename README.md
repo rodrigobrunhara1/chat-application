@@ -34,7 +34,7 @@ Esta é a tela principal do site com algumas diferenças. Ao clicar no ícone, o
 
 E na imagem abaixo é exibida a mensagem "Are you using Human Service" para fins informativos de que essa janela é o contato humano que está operando.
 
-Tecnologias Utilizadas:
+# Tecnologias Utilizadas:
 React.JS
 Typescript
 Javascript
